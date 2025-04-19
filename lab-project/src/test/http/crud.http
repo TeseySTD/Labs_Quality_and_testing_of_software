@@ -1,0 +1,29 @@
+### GET All
+GET http://localhost:8080/api/v1/books
+
+### GET first one
+GET http://localhost:8080/api/v1/books/1
+
+### Create one
+POST http://localhost:8080/api/v1/books
+Content-Type: application/json
+
+{
+  "id": "5",
+  "title": "One Flew Over the Cuckoo's Nest",
+  "author": "Kenneth Elton Kesey",
+  "metadata": "Published in 1962"
+}
+
+#### Update one
+PUT http://localhost:8080/api/v1/books/5
+Content-Type: application/json
+
+{
+  "title": "One Flew Over the Cuckoo's Nest",
+  "author": "Ken Kesey",
+  "metadata": "Published in 1962"
+}
+
+#### DELETE one
+DELETE http://localhost:8080/api/v1/books/5
