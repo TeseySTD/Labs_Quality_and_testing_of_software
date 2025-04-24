@@ -2,7 +2,10 @@ package chnu.edu.labproject.repository;
 
 import chnu.edu.labproject.model.Book;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author Rout
@@ -14,4 +17,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookRepository extends MongoRepository<Book, String> {
+    List<Book> findByTitle(String title);
+
+    @Query("{ 'metadata': ?0 }")
+    List<Book> findByMetadata(String metadata);
 }
