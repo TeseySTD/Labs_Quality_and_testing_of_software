@@ -18,6 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @ToString
 @Document
+@Builder
 public class Book {
     @Id
     private String id;

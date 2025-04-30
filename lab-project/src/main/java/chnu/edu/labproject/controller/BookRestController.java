@@ -1,5 +1,7 @@
 package chnu.edu.labproject.controller;
 
+import chnu.edu.labproject.request.BookCreateRequest;
+import chnu.edu.labproject.request.BookUpdateRequest;
 import chnu.edu.labproject.service.BookService;
 import chnu.edu.labproject.model.Book;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +46,15 @@ public class BookRestController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id) {
         bookService.delById(id);
+    }
+
+    @PostMapping("/dto")
+    public Book insert(@RequestBody BookCreateRequest request) {
+        return bookService.create(request);
+    }
+
+    @PutMapping("/dto")
+    public Book edit(@RequestBody BookUpdateRequest request) {
+        return bookService.update(request);
     }
 }

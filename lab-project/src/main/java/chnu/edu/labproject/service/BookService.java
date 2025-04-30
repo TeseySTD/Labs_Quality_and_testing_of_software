@@ -2,6 +2,8 @@ package chnu.edu.labproject.service;
 
 import chnu.edu.labproject.model.Book;
 import chnu.edu.labproject.repository.BookRepository;
+import chnu.edu.labproject.request.BookCreateRequest;
+import chnu.edu.labproject.request.BookUpdateRequest;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,9 +50,41 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public Book create(BookCreateRequest request) {
+        return bookRepository.save(
+                Book.builder()
+                        .author(request.author())
+                        .metadata(request.metadata())
+                        .title(request.title())
+                        .build()
+        );
+    }
+
     public Book update(String id, Book book) {
-        book.setId(id);
-        return bookRepository.save(book);
+        Book bookPersisted = bookRepository.findById(id).orElse(null);
+        if(bookPersisted != null){
+
+            book.setId(id);
+            return bookRepository.save(book);
+        }
+        else
+            return null;
+    }
+
+    public Book update(BookUpdateRequest request){
+        Book bookPersisted = bookRepository.findById(request.id()).orElse(null);
+        if(bookPersisted != null){
+            return bookRepository.save(
+                    Book.builder()
+                            .id(request.id())
+                            .title(request.title())
+                            .author(request.author())
+                            .metadata(request.metadata())
+                            .build()
+            );
+        }
+        else
+            return null;
     }
 
     public void delById(String id) {
